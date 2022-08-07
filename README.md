@@ -12,12 +12,19 @@ shasum -a 512 --ignore-missing -c CHECKSUM.SHA512-FreeBSD-13.1-RELEASE-amd64
 sudo dd if=FreeBSD-13.1-RELEASE-amd64-memstick.img of=/dev/disk3 bs=1m conv=sync status=progress
 ```
 ## Boot from USB and choose shell access
-### List available devices that will be passed to the installer script
+### Set up network
+```sh
+ifconfig
+dhclient bge0
+```
+### List available devices that will be passed to the installer script later on
 ```sh
 camcontrol devlist
 ```
 ### Download the installer script and run it
 ```sh
+cd /tmp
 fetch https://raw.githubusercontent.com/devald/freebsd-installation-script/main/freebsd_install.sh
+chmod +x freebsd_install.sh
 ./freebsd_install.sh ada0 ada1
 ```
