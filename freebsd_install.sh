@@ -76,7 +76,7 @@ EOF
 cat << EOF > /mnt/etc/rc.conf
 clear_tmp_enable="YES"
 dumpdev="AUTO"
-hostname="freebsd"
+hostname="freebsd.localdomain"
 ifconfig_bge0="DHCP"
 moused_ums0_enable="NO"
 sendmail_enable="NONE"
@@ -97,6 +97,8 @@ zfs_load="YES"
 EOF
 # Set timezone
 chroot /mnt tzsetup Europe/Berlin
+# Copy base.txz for future jails creation
+cp -a /usr/freebsd-dist/base.txz /mnt/root
 # Unmount all ZFS datasets
 zfs unmount -a
 # Export zpool
